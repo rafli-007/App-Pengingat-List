@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pengingat_list/common/constants.dart';
-import 'package:pengingat_list/dataaccess/person.dart';
 import 'package:pengingat_list/presentation/calendar_page/calendar_page.dart';
 import 'package:pengingat_list/presentation/profile_page/profile_page.dart';
 import 'package:pengingat_list/presentation/todo_page/todo_list.dart';
@@ -14,7 +13,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final PersonDataAccess pda = PersonDataAccess();
   int _selectedIndex = 0;
 
   PageController page = PageController();
