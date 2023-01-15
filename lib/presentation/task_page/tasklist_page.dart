@@ -8,14 +8,14 @@ import 'package:pengingat_list/model/task.dart';
 import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart';
 import 'package:intl/intl.dart';
 
-class TodoListPage extends StatefulWidget {
-  const TodoListPage({super.key});
+class TasklistPage extends StatefulWidget {
+  const TasklistPage({super.key});
 
   @override
-  State<TodoListPage> createState() => _TodoListPageState();
+  State<TasklistPage> createState() => _TasklistPageState();
 }
 
-class _TodoListPageState extends State<TodoListPage>
+class _TasklistPageState extends State<TasklistPage>
     with TickerProviderStateMixin {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController showSelectedDate = TextEditingController();
@@ -68,7 +68,6 @@ class _TodoListPageState extends State<TodoListPage>
   }
 
   checked(int done) => done == 0 ? false : true;
-
   toggleTask(bool checked) => checked ? 1 : 0;
 
   void _save() {

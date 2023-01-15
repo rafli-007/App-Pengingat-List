@@ -3,8 +3,7 @@ import 'package:pengingat_list/common/constants.dart';
 import 'package:pengingat_list/common/text_theme.dart';
 
 class CalendarPage extends StatelessWidget {
-  const CalendarPage({super.key, required this.title});
-  final String title;
+  const CalendarPage({super.key});
 
   @override
   Widget build(BuildContext context) {

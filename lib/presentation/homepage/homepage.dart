@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pengingat_list/common/constants.dart';
 import 'package:pengingat_list/presentation/calendar_page/calendar_page.dart';
 import 'package:pengingat_list/presentation/profile_page/profile_page.dart';
-import 'package:pengingat_list/presentation/todo_page/todo_list.dart';
+import 'package:pengingat_list/presentation/task_page/tasklist_page.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -24,10 +24,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   static const List<Widget> _pages = <Widget>[
-    TodoListPage(),
-    CalendarPage(title: 'Calendar'),
+    TasklistPage(),
+    CalendarPage(),
     ProfilePage(),
-    CalendarPage(title: 'title')
   ];
 
   bool isOpened = false;
@@ -61,53 +60,52 @@ class _MyHomePageState extends State<MyHomePage> {
         child: IgnorePointer(
           ignoring: isOpened,
           child: Scaffold(
-            body: GestureDetector(
-              onTap: () {
-                _sideMenuKey.currentState!.closeSideMenu();
-              },
-              child: _pages.elementAt(_selectedIndex),
-            ),
-            bottomNavigationBar: Container(
-              width: Size.infinite.width,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () => toggleMenu(),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: BottomNavigationBar(
-                      currentIndex: _selectedIndex,
-                      backgroundColor: Colors.white,
-                      onTap: _onItemTapped,
-                      elevation: 0,
-                      items: const <BottomNavigationBarItem>[
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.task), label: 'Activity'),
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.calendar_month),
-                            label: 'Calendar'),
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.person), label: 'My Profile'),
-                      ],
-                    ),
-                  ),
-                ],
+              body: GestureDetector(
+                onTap: () {
+                  _sideMenuKey.currentState!.closeSideMenu();
+                },
+                child: _pages.elementAt(_selectedIndex),
               ),
-            ),
-          ),
+              bottomNavigationBar: buttomNavigationBar()),
         ),
       ),
     );
   }
 
+  buttomNavigationBar() => Container(
+        width: Size.infinite.width,
+        color: Colors.white,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () => toggleMenu(),
+              ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: BottomNavigationBar(
+                currentIndex: _selectedIndex,
+                backgroundColor: Colors.white,
+                onTap: _onItemTapped,
+                elevation: 0,
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.task), label: 'Activity'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.calendar_month), label: 'Calendar'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person), label: 'My Profile'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
   Widget buildMenu() {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 50.0),
