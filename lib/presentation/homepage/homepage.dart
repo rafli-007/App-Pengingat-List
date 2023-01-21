@@ -115,11 +115,36 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(name, style: TextStyle(color: Colors.white, fontSize: 32)),
-                SizedBox(height: 20.0),
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset(
+                    'assets/images/foto identity.jpeg',
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                const SizedBox(width: 20.0),
+                SizedBox(
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(name,
+                          style: TextStyle(color: Colors.white, fontSize: 26)),
+                      Text(npm,
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
+                      Text(jurusan,
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
+                      Text(kelas,
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
