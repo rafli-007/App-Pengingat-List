@@ -41,15 +41,21 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color: Colors.grey.shade200),
-              child: const Icon(
-                Icons.person,
-                color: Colors.grey,
-              )),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle, color: Colors.grey.shade200),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset(
+                'assets/images/foto identity.jpeg',
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+          ),
         ),
-        title: const Text('Mohamad Rafli Dwitama',
-            style: TextStyle(color: Colors.black)),
+        title: const Text(
+          'Mohamad Rafli Dwitama',
+          style: TextStyle(color: Colors.black),
+        ),
         toolbarHeight: 70,
       ),
       body: Padding(
@@ -136,8 +142,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ListTile(
                         leading: Icon(Icons.calendar_month),
                         minLeadingWidth: 20,
-                        title: Text('Black Pink Concert'),
-                        trailing: Text('01-15'),
+                        title: Text('UAS Pemograman Mobile'),
+                        trailing: Text('21-01-2023'),
                       ),
                     ],
                   ),
