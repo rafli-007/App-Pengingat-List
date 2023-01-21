@@ -8,6 +8,9 @@ const String noTask = 'No tasks for the day.';
 const String addTasks = 'Click + to create your tasks.';
 const String dueDate = 'Due Date';
 const String name = 'M Rafli D';
+const String npm = '43A87006190321';
+const String jurusan = 'Teknik Informatika';
+const String kelas = 'S1/TI/A/7/P';
 
 const List<String> overviewCategory = [activityDone, pendingActivity];
 const List<String> categories = [
