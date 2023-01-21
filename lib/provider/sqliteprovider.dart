@@ -19,7 +19,7 @@ class DatabaseProvider {
   Future<Database> getDatabaseInstance() async {
     try {
       Directory directory = await getApplicationDocumentsDirectory();
-      String path = join(directory.path, "tasks.db");
+      String path = join(directory.path, "tasks_activity.db");
       final result = await openDatabase(path, version: 1,
           onCreate: (Database db, int version) async {
         db.execute("CREATE TABLE Task("
@@ -27,7 +27,8 @@ class DatabaseProvider {
             "title TEXT,"
             "category TEXT,"
             "done INT,"
-            "taskDate TEXT"
+            "taskDate TEXT,"
+            "image TEXT"
             ")");
       });
       return result;

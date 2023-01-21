@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pengingat_list/common/constants.dart';
 import 'package:get/get.dart';
 import 'package:pengingat_list/dataaccess/task.dart';
@@ -27,6 +31,8 @@ class _TasklistPageState extends State<TasklistPage>
 
   String? selectedCategory;
   DateTime? selectedDate;
+  var imagePath = ''.obs;
+  String? selectedImage;
 
   formattedDate(DateTime date) => DateFormat('yyyy-MM-dd').format(date);
   @override
@@ -39,11 +45,11 @@ class _TasklistPageState extends State<TasklistPage>
   saveTask() async {
     await dataAccess.insert(
       Task(
-        title: titleController.text,
-        category: selectedCategory ?? 'Others',
-        done: 0,
-        taskDate: formattedDate(selectedDate!),
-      ),
+          title: titleController.text,
+          category: selectedCategory ?? 'Others',
+          done: 0,
+          taskDate: formattedDate(selectedDate!),
+          image: selectedImage),
     );
   }
 
@@ -182,6 +188,10 @@ class _TasklistPageState extends State<TasklistPage>
                         selectedCategory = item.category;
                         selectedDate = DateTime.tryParse(item.taskDate);
                         showSelectedDate.text = item.taskDate;
+                        if (item.image != null) {
+                          selectedImage = item.image ?? '';
+                        }
+
                         showTaskDetail(item);
                       },
                       trailing: Checkbox(
@@ -241,7 +251,11 @@ class _TasklistPageState extends State<TasklistPage>
                           const InputDecoration(border: InputBorder.none),
                     ),
                   ),
-                )
+                ),
+                if (selectedImage != null)
+                  Image.memory(
+                      height: 150,
+                      Uint8List.fromList(base64.decode(selectedImage!)))
               ],
             ),
           ),
@@ -280,6 +294,9 @@ class _TasklistPageState extends State<TasklistPage>
                 children: [
                   categoriesWidget(),
                   calendar(),
+                  IconButton(
+                      onPressed: openCamera,
+                      icon: const Icon(Icons.add_a_photo_rounded)),
                   IconButton(onPressed: _save, icon: const Icon(Icons.send)),
                 ],
               ),
@@ -350,4 +367,19 @@ class _TasklistPageState extends State<TasklistPage>
         onPressed: showCalendar,
         icon: const Icon(Icons.calendar_month),
       );
+
+  Future<void> openCamera() async {
+    final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
+
+    final data = await pickedImage!.readAsBytes();
+    setState(() {
+      if (pickedImage != null) {
+        final imageEncoded = base64.encode(data);
+        selectedImage = imageEncoded;
+      }
+    });
+
+    imagePath(pickedImage == null ? '' : pickedImage.path);
+  }
 }

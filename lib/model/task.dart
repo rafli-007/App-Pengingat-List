@@ -4,6 +4,7 @@ class Task {
   String category;
   int done;
   String taskDate;
+  String? image;
 
   Task({
     this.id,
@@ -11,6 +12,7 @@ class Task {
     required this.category,
     required this.done,
     required this.taskDate,
+    this.image,
   });
 
   Map<String, dynamic> toMap() => {
@@ -19,6 +21,7 @@ class Task {
         'category': category,
         'done': done,
         'taskDate': taskDate,
+        'image': image,
       };
 
   factory Task.fromMap(Map<String, dynamic> map) => Task(
@@ -27,5 +30,6 @@ class Task {
         category: map['category'],
         done: map['done'],
         taskDate: map['taskDate'],
+        image: map['image'],
       );
 }
