@@ -80,7 +80,7 @@ class _TasklistPageState extends State<TasklistPage>
     setState(() {
       titleController.clear();
       selectedCategory = null;
-      selectedDate = null;
+      selectedDate = DateTime.now();
     });
   }
 
